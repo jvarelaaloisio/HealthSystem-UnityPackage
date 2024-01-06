@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace HealthSystem.Runtime.Components.Hazards
+namespace HealthSystem.Runtime.Components.Damagers
 {
 	[Tooltip("Component that can attack overlapping IHealthComponent" +
 	         "\nUseful for weapons and enemies")]
-	public abstract class Hazard : DamageDealer
+	public abstract class DamageArea : DamageDealer
 	{
 		private readonly HashSet<IHealthComponent> _targets = new();
 
@@ -34,13 +33,13 @@ namespace HealthSystem.Runtime.Components.Hazards
 
 		private void TryAddTarget(Component other)
 		{
-			if (TryFindHealth(other, out var target))
+			if (other.TryGetComponent(out IHealthComponent target))
 				_targets.Add(target);
 		}
 
 		private void TryRemoveTarget(Component other)
 		{
-			if (TryFindHealth(other, out var target))
+			if (other.TryGetComponent(out IHealthComponent target))
 				_targets.Remove(target);
 		}
 	}

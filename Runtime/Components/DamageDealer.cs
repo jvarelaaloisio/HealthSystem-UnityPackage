@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using HealthSystem.Runtime.Helpers;
+using UnityEngine;
 
-namespace HealthSystem.Runtime.Components.Hazards
+namespace HealthSystem.Runtime.Components
 {
     public class DamageDealer : MonoBehaviour
     {
         [SerializeField] protected int damage;
-		
+
         /// <summary>
         /// Deals damage to the target
         /// </summary>
@@ -18,15 +19,8 @@ namespace HealthSystem.Runtime.Components.Hazards
         /// <param name="target"></param>
         public virtual void TryAttack(Component target)
         {
-            if (TryFindHealth(target, out var healthComponent))
-                Attack(healthComponent);
-            else
+            if (!target.TryAttack(damage))
                 Debug.LogWarning($"{name}: Tried to attack {target.name}, but couldn't find the health component!");
-        }
-
-        protected virtual bool TryFindHealth(Component target, out IHealthComponent healthTarget)
-        {
-            return target.TryGetComponent(out healthTarget);
         }
     }
 }

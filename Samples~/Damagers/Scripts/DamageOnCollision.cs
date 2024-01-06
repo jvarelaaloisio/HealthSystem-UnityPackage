@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace HealthSystem.Runtime.Components.Hazards
+namespace HealthSystem.Runtime.Components.Damagers
 {
-    public class DealDamageOnCollision : DamageDealer
+    public class DamageOnCollision : DamageDealer
     {
         private void OnCollisionEnter(Collision collision) => TryAttack(collision.collider);
 

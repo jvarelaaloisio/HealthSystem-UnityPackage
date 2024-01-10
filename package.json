@@ -2,7 +2,7 @@
   "name": "com.jvarelaaloisio.health",
   "displayName": "Health System",
   "description": "Basic health system unit-tested to provide a bug-free quick implementation",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "unity": "2020.3",
   "author": {
     "name": "Juan Pablo Varela Aloisio",

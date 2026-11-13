@@ -12,6 +12,7 @@ namespace Tests.Runtime
         private const int MaxHP = 10;
         private const int InititalHP = 5;
         private const int OverflowHP = 15;
+        private const int KillingDamage = 10;
         private GameObject _gameObject;
         private HealthComponent _healthComponent;
 
@@ -56,6 +57,20 @@ namespace Tests.Runtime
             _healthComponent.CanOverFlowHp = true;
             _healthComponent.Setup();
             Assert.AreEqual(_healthComponent.Health.HP, OverflowHP);
+        }
+        
+        [Test]
+        public void GivenKillingDamage_OnDeathIsCalled()
+        {
+            bool deathWasCalled = false;
+            
+            _healthComponent.MaxHp = MaxHP;
+            _healthComponent.InitialHp = InititalHP;
+            _healthComponent.OnDeath += _ => deathWasCalled = true;
+            _healthComponent.Setup();
+
+            _healthComponent.TakeDamage(KillingDamage);
+            Assert.IsTrue(deathWasCalled);
         }
     }
 }

@@ -1,7 +1,12 @@
-﻿namespace HealthSystem.Runtime
+﻿using System;
+using UnityEngine;
+
+namespace HealthSystem.Runtime
 {
     public interface IHealthComponent
     {
+        event Action<IHealthComponent> OnDeath;
+        GameObject gameObject { get; }
         Health Health { get; }
         int MaxHp { get; set; }
         int InitialHp { get; set; }

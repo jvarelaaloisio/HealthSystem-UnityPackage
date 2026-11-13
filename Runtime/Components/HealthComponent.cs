@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace HealthSystem.Runtime.Components
@@ -10,6 +11,7 @@ namespace HealthSystem.Runtime.Components
         
         [SerializeField] private bool setupInAwake = true;
 
+        public event Action<IHealthComponent> OnDeath;
         public Health Health { get; private set; }
 
         protected virtual void Awake()
@@ -21,6 +23,7 @@ namespace HealthSystem.Runtime.Components
         public virtual void Setup()
         {
             Health = new Health(MaxHp, InitialHp, CanOverFlowHp);
+            Health.OnDeath += () => OnDeath?.Invoke(this); 
         }
 
         public virtual void TakeDamage(int damage) => Health.TakeDamage(damage);
